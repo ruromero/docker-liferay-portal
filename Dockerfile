@@ -36,12 +36,12 @@ RUN mkdir -p "$LIFERAY_HOME" \
       && gosu nobody true
 
 COPY ./entrypoint.sh /usr/local/bin
-RUN chmod +x /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh $CATALINA_HOME/bin/catalina.sh
 
 EXPOSE 8080/tcp
 EXPOSE 11311/tcp
 
-VOLUME /storage
+USER 1000
 
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["catalina.sh", "run"]
